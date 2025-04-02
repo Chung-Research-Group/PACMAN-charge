@@ -311,5 +311,5 @@ def get_repeat_data_from_arcmof(root_cif_dir,save_repeat_dir):
     for mof in mofs:
         mof = mof.replace(".cif","").split("/")[-1]
         data_cif = ReadCif(root_cif_dir + mof + ".cif")
-        charge = data_cif[data_cif.keys()[0]]["_atom_site_pbe_cm5_charge"]
+        charge = data_cif[data_cif.keys()[0]]["_atom_type_partial_charge"]
         np.save(save_repeat_dir + mof + '.npy', charge)  
