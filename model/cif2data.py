@@ -13,7 +13,7 @@ from ase import neighborlist
 from pymatgen.analysis import local_env
 from pymatgen.io.ase import AseAtomsAdaptor
 from pymatgen.analysis.graphs import StructureGraph
-
+from gemmi import cif
 
 # check atom dict, H2O molec, closed dista
 def check_all(root_cif_dir, cutoff = 0.75):
@@ -170,6 +170,23 @@ def pre4opt(csv, root_cif_dir, save_pos_dir):
             print(f"Processed {mof} successfully.")
         except Exception as e:
             print(f"An error occurred while processing {mof}: {e}")
+
+def get_pos_gemmi(cif_file,out_file):
+    doc = cif.read_file(cif_file)
+    block = doc.sole_block()
+    x = block.find_loop("_atom_site_fract_x")
+    y = block.find_loop("_atom_site_fract_y")
+    z = block.find_loop("_atom_site_fract_z")
+    pos =[]
+    for i in range(len(x)):
+        pos.append([float(x[i]),float(y[i]),float(z[i])])
+    np.save(out_file, pos)
+
+def get_charge_gemmi(cif_file,out_file):
+    doc = cif.read_file(cif_file)
+    block = doc.sole_block()
+    charges = block.find_loop("_atom_site_pbe_ddec_charge")
+    np.save(out_file, charges)
 
 # get numbers of atoms for each structure
 def n_atom(data_csv,root_cif_dir):

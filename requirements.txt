@@ -7,3 +7,4 @@ scikit-learn>=0.19.1
 joblib>= 0.13.2
 torch
 PyCifRW==4.4.6
+gemmi==0.7.0
