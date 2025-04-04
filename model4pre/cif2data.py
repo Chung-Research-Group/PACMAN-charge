@@ -7,7 +7,7 @@ from pymatgen.io.ase import AseAtomsAdaptor
 from pymatgen.io.cif import CifParser
 from pymatgen.core import Structure
 from collections import defaultdict
-import warnings
+
 warnings.filterwarnings('ignore')
 
 def ensure_data(file_path):
