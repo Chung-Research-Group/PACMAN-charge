@@ -15,9 +15,10 @@ def main():
     parser.add_argument('folder_name', type=str, help='Relative path to a folder with cif files without partial atomic charges')
     parser.add_argument('--charge_type', type=str, default='DDEC6', choices=['DDEC6', 'Bader', 'CM5', 'REPEAT'], help='Type of charges to use')
     parser.add_argument('--digits', type=int, default=6, help='Number of decimal places to print for partial atomic charges')
-    parser.add_argument('--atom_type', type=bool, default=True, help='Keep the same partial atomic charge for the same atom types')
-    parser.add_argument('--neutral', type=bool, default=True, help='Keep the net charge is zero')
-    parser.add_argument('--keep_connect', type=bool, default=True, help='Keep information from original CIF file')
+    parser.add_argument('--no_atom_type', action='store_false', dest='atom_type', help='Disable keeping the same partial atomic charge for the same atom types')
+    parser.add_argument('--no_neutral', action='store_false', dest='neutral', help='Disable net charge zeroing')
+    parser.add_argument('--no_keep_connect', action='store_false', dest='keep_connect', help='Disable keeping CIF connectivity info')
+
     args = parser.parse_args()
 
     path = args.folder_name
@@ -62,12 +63,12 @@ def main():
     f.close()
 
 
-    print("Folder Name: " + str(path))
-    print("Charge Type: "+ str(charge_type))
-    print("Digits: " + str(digits))
-    print("Atom Type:" + str(atom_type))
-    print("Neutral: " + str(neutral))
-    print("Keep Connect: " + str(keep_connect))
+    print("Folder Name:", str(path))
+    print("Charge Type:", str(charge_type))
+    print("Digits:", str(digits))
+    print("Atom Type:", str(atom_type))
+    print("Neutral:", str(neutral))
+    print("Keep Connect:", str(keep_connect))
 
     cif_files = glob.glob(os.path.join(path, '*.cif'))
     print("writing cif: ***_pacman.cif")
