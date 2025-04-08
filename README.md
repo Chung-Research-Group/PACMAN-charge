@@ -42,9 +42,14 @@ pmcharge.predict(cif_file="./test/Cu-BTC.cif",charge_type="DDEC6",digits=10,atom
                                   
 **Terminal**
 ```sh
-python pmcharge.py folder-name[path] --charge_type[DDEC6/Bader/CM5/REPEAT] --digits[int] --atom_type[bool] --neutral[bool] --keep_connect[bool]
+python pmcharge.py <folder_path> \
+    [--charge_type DDEC6|Bader|CM5|REPEAT] \
+    [--digits <int>] \
+    [--no_atom_type] \
+    [--no_neutral] \
+    [--no_keep_connect]
 ```
-**Example command:** ```python pmcharge.py test_file/test-1/ --charge_type DDEC6 --digits 10```                                                    
+**Example command:** ```python pmcharge.py test_file/test-1/ --charge_type DDEC6 --digits 10 --no_keep_connect```                                                    
 
 **Help usage information:** ```python pmcharge.py -h```                                     
 
